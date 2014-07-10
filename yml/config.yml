@@ -1,6 +1,16 @@
+# in which worlds you shouldn't be able to build
 dontUse:
   - world1
+  
+# in which worlds you shouldn't be able to build
 dontBuild:
   - world1_the_end
+ 
+# in which worlds you shouldn't be able to build
 dontBreak:
   - world1_nether
+  
+# which language should the plugin use
+# possible at the moment:
+# - deDE = Deutsch
+language: deDE
