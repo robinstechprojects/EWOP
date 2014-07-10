@@ -15,7 +15,7 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
-	private static File configFile = new File("plugins/ewop/config.yml");
+	private static File configFile = new File("plugins/EWOP/config.yml");
 	private static List<String> dontUse, dontBuild, dontBreak;
 	private static HashMap<String, String> language = new HashMap<String, String>();
 
@@ -36,7 +36,7 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() { 
-		saveConfig();
+		if (!configFile.exists()) saveDefaultConfig();
 		FileConfiguration configCfg = YamlConfiguration.loadConfiguration(configFile);
 		
 		Bukkit.getPluginManager().addPermission(new Permission("ewop.use", "The permission to use things everywhere."));

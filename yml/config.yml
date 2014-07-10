@@ -10,6 +10,10 @@ dontBuild:
 dontBreak:
   - world1_nether
   
+################### USELESS ###################
+######## parts mentioned below do NOT #########
+########## change anything right now ##########
+###############################################
 # which language should the plugin use
 # possible at the moment:
 # - deDE = Deutsch
