@@ -46,7 +46,6 @@ public class Main extends JavaPlugin {
 		
 		System.out.println("[EWOP] EWOP " + this.getDescription().getVersion() + " loaded without any problems!");
 		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
-		System.out.println("Du bist kacke!");
 	}
 	
 	@Override
