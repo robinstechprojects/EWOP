@@ -1,0 +1,6 @@
+dontUse:
+  - world1
+dontBuild:
+  - world1_the_end
+dontBreak:
+  - world1_nether

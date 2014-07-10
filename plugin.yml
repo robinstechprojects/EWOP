@@ -1,0 +1,6 @@
+name: EasyWorldProtect
+version: A0.1_B1
+description: With this plugin you can protect your server worlds!
+author: FroznMine
+main: de.froznmine.ewop.Main
+prefix: EWOP
