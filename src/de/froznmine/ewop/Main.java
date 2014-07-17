@@ -36,7 +36,11 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() { 
-		if (!configFile.exists()) saveDefaultConfig();
+		boolean cfgNeu = false, langNeu = false, problems = false;
+		if (!configFile.exists()) {
+			cfgNeu = true;
+			saveDefaultConfig();
+		}
 		
 		FileConfiguration configCfg = YamlConfiguration.loadConfiguration(configFile);
 		
@@ -49,9 +53,13 @@ public class Main extends JavaPlugin {
 		dontBreak = configCfg.getStringList("dontBreak");
 		
 		//Unused
-		if (!(new File("plugins/EWOP/" + configCfg.get("language") + ".yml")).exists()) saveResource(configCfg.get("language") + ".yml", false);
+		File langFile = new File("plugins/EWOP/" + configCfg.get("language") + ".yml");
+		if (!langFile.exists()) {
+			langNeu = true;
+			saveResource(configCfg.get("language") + ".yml", false);
+		}
 		
-		FileConfiguration langCfg = YamlConfiguration.loadConfiguration(new File("plugins/EWOP/" + configCfg.get("language") + ".yml"));
+		FileConfiguration langCfg = YamlConfiguration.loadConfiguration(langFile);
 		
 		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
 		for (String key : keys) {
@@ -60,8 +68,9 @@ public class Main extends JavaPlugin {
 			language.put(key, text);
 		}
 		//Unused end
-		
-		System.out.println("[EWOP] " + language.get("loadNoProblems"));
+		if (cfgNeu) System.out.println("[EWOP] " + language.get("configFileCreated"));
+		if (langNeu) System.out.println("[EWOP] " + language.get("languageFileCreated"));
+		if (!problems) System.out.println("[EWOP] " + language.get("loadNoProblems"));
 		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
 	}
 	
