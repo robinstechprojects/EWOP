@@ -51,12 +51,13 @@ public class Main extends JavaPlugin {
 		//Unused
 		if (!(new File("plugins/EWOP/" + configCfg.get("language") + ".yml")).exists()) saveResource(configCfg.get("language") + ".yml", false);
 		
-		FileConfiguration langCfg = YamlConfiguration.loadConfiguration(new File("plugins/EWOP.jar/" + configCfg.get("language") + ".yml"));
+		FileConfiguration langCfg = YamlConfiguration.loadConfiguration(new File("plugins/EWOP/" + configCfg.get("language") + ".yml"));
 		
 		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
 		for (String key : keys) {
-			key.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
-			language.put(key, langCfg.getString(key));
+			String text = langCfg.getString(key);
+			text = text.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
+			language.put(key, text);
 		}
 		//Unused end
 		
