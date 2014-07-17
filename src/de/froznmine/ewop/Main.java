@@ -15,7 +15,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
-	private static File configFile = new File("plugins/EWOP/config.yml");
 	private static List<String> dontUse, dontBuild, dontBreak;
 	private static HashMap<String, String> language = new HashMap<String, String>();
 
@@ -36,13 +35,34 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() { 
+		File configFile, langFile;
+		FileConfiguration configCfg, langCfg;
 		boolean cfgNeu = false, langNeu = false, problems = false;
+		
+		configFile = new File("plugins/EWOP/config.yml");
+		
 		if (!configFile.exists()) {
 			cfgNeu = true;
 			saveDefaultConfig();
 		}
 		
-		FileConfiguration configCfg = YamlConfiguration.loadConfiguration(configFile);
+		configCfg = YamlConfiguration.loadConfiguration(configFile);
+		
+		langFile = new File("plugins/EWOP/" + configCfg.get("language") + ".yml");
+		
+		if (!langFile.exists()) {
+			langNeu = true;
+			saveResource(configCfg.get("language") + ".yml", false);
+		}
+		
+		langCfg = YamlConfiguration.loadConfiguration(langFile);
+		
+		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
+		for (String key : keys) {
+			String text = langCfg.getString(key);
+			text = text.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
+			language.put(key, text);
+		}
 		
 		Bukkit.getPluginManager().addPermission(new Permission("ewop.use", "The permission to use things everywhere."));
 		Bukkit.getPluginManager().addPermission(new Permission("ewop.break", "The permission to break things everywhere."));
@@ -52,26 +72,12 @@ public class Main extends JavaPlugin {
 		dontBuild = configCfg.getStringList("dontBuild");
 		dontBreak = configCfg.getStringList("dontBreak");
 		
-		//Unused
-		File langFile = new File("plugins/EWOP/" + configCfg.get("language") + ".yml");
-		if (!langFile.exists()) {
-			langNeu = true;
-			saveResource(configCfg.get("language") + ".yml", false);
-		}
-		
-		FileConfiguration langCfg = YamlConfiguration.loadConfiguration(langFile);
-		
-		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
-		for (String key : keys) {
-			String text = langCfg.getString(key);
-			text = text.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
-			language.put(key, text);
-		}
-		//Unused end
+		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
+	
 		if (cfgNeu) System.out.println("[EWOP] " + language.get("configFileCreated"));
 		if (langNeu) System.out.println("[EWOP] " + language.get("languageFileCreated"));
 		if (!problems) System.out.println("[EWOP] " + language.get("loadNoProblems"));
-		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
+		
 	}
 	
 	@Override
@@ -80,6 +86,6 @@ public class Main extends JavaPlugin {
 	}
 	@Override
 	public void onDisable() { 
-	
+		
 	}
 }
