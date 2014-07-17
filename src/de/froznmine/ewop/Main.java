@@ -37,6 +37,7 @@ public class Main extends JavaPlugin {
 	@Override
 	public void onEnable() { 
 		if (!configFile.exists()) saveDefaultConfig();
+		
 		FileConfiguration configCfg = YamlConfiguration.loadConfiguration(configFile);
 		
 		Bukkit.getPluginManager().addPermission(new Permission("ewop.use", "The permission to use things everywhere."));
@@ -48,6 +49,8 @@ public class Main extends JavaPlugin {
 		dontBreak = configCfg.getStringList("dontBreak");
 		
 		//Unused
+		if (!(new File("plugins/EWOP/" + configCfg.get("language") + ".yml")).exists()) saveResource(configCfg.get("language") + ".yml", false);
+		
 		FileConfiguration langCfg = YamlConfiguration.loadConfiguration(new File("plugins/EWOP.jar/" + configCfg.get("language") + ".yml"));
 		
 		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
