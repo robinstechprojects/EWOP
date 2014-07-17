@@ -52,11 +52,12 @@ public class Main extends JavaPlugin {
 		
 		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
 		for (String key : keys) {
+			key.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
 			language.put(key, langCfg.getString(key));
 		}
 		//Unused end
 		
-		System.out.println("[EWOP] EWOP " + this.getDescription().getVersion() + " loaded without any problems!");
+		System.out.println("[EWOP] " + language.get("loadNoProblems"));
 		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
 	}
 	
