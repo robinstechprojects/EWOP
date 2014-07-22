@@ -9,12 +9,8 @@ dontBuild:
 # in which worlds you shouldn't be able to build
 dontBreak:
   - world1_nether
-  
-################### USELESS ###################
-######## parts mentioned below do NOT #########
-########## change anything right now ##########
-###############################################
-# which language should the plugin use
+
+# which language the plugin should use
 # possible at the moment:
 # - deDE = Deutsch
 language: deDE
