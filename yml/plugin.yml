@@ -4,3 +4,16 @@ description: With this plugin you can protect your server worlds!
 author: FroznMine
 main: de.froznmine.ewop.Main
 prefix: EWOP
+commands:
+  nouse:
+    usage: /nouse [welt]
+    description: Schütze eine Welt davor, dass in ihr Items benutzt werden.
+    permission: mcprojekt.cmd.use
+  nobuild:
+    usage: /nobuild [welt]
+    description: Schütze eine Welt davor, dass in ihr Gebaut wird.
+    permission: mcprojekt.cmd.build
+  nobreak:
+    usage: /nobreak [welt]
+    description: Schütze eine Welt davor, dass in ihr Abgebaut wird.
+    permission: mcprojekt.cmd.break
