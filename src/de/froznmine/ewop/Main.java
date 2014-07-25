@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -72,6 +73,12 @@ public class Main extends JavaPlugin {
 		dontBuild = configCfg.getStringList("dontBuild");
 		dontBreak = configCfg.getStringList("dontBreak");
 		
+		Commands executor = new Commands(this);
+		
+		getCommand("nouse").setExecutor(executor);
+		getCommand("nobuild").setExecutor(executor);
+		getCommand("nobreak").setExecutor(executor);
+		
 		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
 	
 		if (cfgNeu) System.out.println("[EWOP] " + language.get("configFileCreated"));
@@ -80,10 +87,44 @@ public class Main extends JavaPlugin {
 		
 	}
 	
+	public static boolean blockUse(String world) {
+		World w = Bukkit.getWorld(world);
+		if (w != null) {
+			if (!dontUse.contains(world)) {
+				dontUse.add(world);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean blockBuild(String world) {
+		World w = Bukkit.getWorld(world);
+		if (w != null) {
+			if (!dontBuild.contains(world)) {
+				dontBuild.add(world);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static boolean blockBreak(String world) {
+		World w = Bukkit.getWorld(world);
+		if (w != null) {
+			if (!dontBreak.contains(world)) {
+				dontBreak.add(world);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		return false;
 	}
+	
 	@Override
 	public void onDisable() { 
 		
