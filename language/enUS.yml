@@ -1,0 +1,6 @@
+# Lückenfüller --- fill-in
+# Aktuelle Version/current version - <version>
+#
+loadNoProblems: Keine Probleme beim Laden von <version>.
+configFileCreated: config.yml wurde erfolgreich erstellt.
+languageFileCreated: Die Sprachdatei wurde erfolgreich erstellt.
