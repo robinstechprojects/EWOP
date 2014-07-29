@@ -19,6 +19,9 @@ public class Main extends JavaPlugin {
 	private static List<String> dontUse, dontBuild, dontBreak;
 	private static HashMap<String, String> language = new HashMap<String, String>();
 
+	private File configFile;
+	public FileConfiguration configCfg;
+	
 	public static boolean canUseIn(Player p, String name) {
 		if (dontUse.contains(name) && !p.hasPermission("ewop.use")) return false;
 		return true;
@@ -36,8 +39,6 @@ public class Main extends JavaPlugin {
 	
 	@Override
 	public void onEnable() { 
-		File configFile, langFile;
-		FileConfiguration configCfg, langCfg;
 		boolean cfgNeu = false, langNeu = false, problems = false;
 		
 		configFile = new File("plugins/EWOP/config.yml");
@@ -45,25 +46,18 @@ public class Main extends JavaPlugin {
 		if (!configFile.exists()) {
 			cfgNeu = true;
 			saveDefaultConfig();
-		}
+		}	
 		
 		configCfg = YamlConfiguration.loadConfiguration(configFile);
 		
-		langFile = new File("plugins/EWOP/" + configCfg.get("language") + ".yml");
+		File langFile = new File("plugins/EWOP/" + configCfg.get("language") + ".yml");
 		
 		if (!langFile.exists()) {
 			langNeu = true;
 			saveResource(configCfg.get("language") + ".yml", false);
 		}
-		
-		langCfg = YamlConfiguration.loadConfiguration(langFile);
-		
-		Set<String> keys = langCfg.getConfigurationSection("").getKeys(false);
-		for (String key : keys) {
-			String text = langCfg.getString(key);
-			text = text.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
-			language.put(key, text);
-		}
+
+		Language.setup(this);
 		
 		Bukkit.getPluginManager().addPermission(new Permission("ewop.use", "The permission to use things everywhere."));
 		Bukkit.getPluginManager().addPermission(new Permission("ewop.break", "The permission to break things everywhere."));
@@ -80,44 +74,94 @@ public class Main extends JavaPlugin {
 		getCommand("nobreak").setExecutor(executor);
 		
 		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
-	
 		if (cfgNeu) System.out.println("[EWOP] " + language.get("configFileCreated"));
 		if (langNeu) System.out.println("[EWOP] " + language.get("languageFileCreated"));
 		if (!problems) System.out.println("[EWOP] " + language.get("loadNoProblems"));
 		
 	}
 	
-	public static boolean blockUse(String world) {
-		World w = Bukkit.getWorld(world);
-		if (w != null) {
-			if (!dontUse.contains(world)) {
+	public byte blockUse(String world) {
+		if (!dontUse.contains(world)) {
+			World w = Bukkit.getWorld(world);
+			if (w != null) {
 				dontUse.add(world);
-				return true;
+				return 1;
+			}
+			else {
+				return -1;
 			}
 		}
-		return false;
+		return 0;
 	}
 	
-	public static boolean blockBuild(String world) {
-		World w = Bukkit.getWorld(world);
-		if (w != null) {
-			if (!dontBuild.contains(world)) {
+	public byte blockBuild(String world) {
+		if (!dontBuild.contains(world)) {
+			World w = Bukkit.getWorld(world);
+			if (w != null) {
 				dontBuild.add(world);
-				return true;
+				return 1;
+			}
+			else {
+				return -1;
 			}
 		}
-		return false;
+		return 0;
 	}
 
-	public static boolean blockBreak(String world) {
-		World w = Bukkit.getWorld(world);
-		if (w != null) {
-			if (!dontBreak.contains(world)) {
+	public byte blockBreak(String world) {
+		if (!dontBreak.contains(world)) {
+			World w = Bukkit.getWorld(world);
+			if (w != null) {
 				dontBreak.add(world);
-				return true;
+				return 1;
+			}
+			else {
+				return -1;
 			}
 		}
-		return false;
+		return 0;
+	}
+	
+	public byte allowUse(String world) {
+		if (dontUse.contains(world)) {
+			World w = Bukkit.getWorld(world);
+			if (w != null) {
+				dontUse.remove(world);
+				return 1;
+			}
+			else {
+				return -1;
+			}
+		}
+		return 0;
+	}
+	
+	public byte allowBuild(String world) {
+		if (dontBuild.contains(world)) {
+			World w = Bukkit.getWorld(world);
+			if (w != null) {
+				dontBuild.remove(world);
+				return 1;
+			}
+			else {
+				return -1;
+			}
+		}
+		return 0;
+	}
+
+	public byte allowBreak(String world) {
+		if (dontBreak.contains(world)) {
+			World w = Bukkit.getWorld(world);
+			if (w != null) {
+				dontBreak.remove(world);
+				return 1;
+			}
+			else {
+				return -1;
+			}
+		}
+		return 0;
 	}
 	
 	@Override
