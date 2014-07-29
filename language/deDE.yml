@@ -1,6 +1,30 @@
 # Lückenfüller --- fill-in
 # Aktuelle Version/current version - <version>
-#
+# Welt/world - <world>
+
+###########################
+## (1) Allgemein/general ##
+###########################
+
 loadNoProblems: Keine Probleme beim Laden von <version>.
 configFileCreated: config.yml wurde erfolgreich erstellt.
 languageFileCreated: Die Sprachdatei wurde erfolgreich erstellt.
+
+############################
+## (2) Kommandos/commands ##
+############################
+
+commandWorldBlockUseSuccess:
+commandWorldBlockUseFailedAlready:
+commandWorldBlockUseFailedNoWorld:
+commandWorldBlockUseFailedWorldMissing:
+
+commandWorldBlockBuildSuccess:
+commandWorldBlockBuildFailedAlready:
+commandWorldBlockBuildFailedNoWorld:
+commandWorldBlockBuildFailedWorldMissing:
+
+commandWorldBlockBreakSuccess:
+commandWorldBlockBreakFailedAlready:
+commandWorldBlockBreakFailedNoWorld:
+commandWorldBlockBreakFailedWorldMissing:
