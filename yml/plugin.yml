@@ -1,5 +1,5 @@
 name: EWOP
-version: B0.3_B1
+version: R1.0_B1
 description: With this plugin you can protect your server worlds!
 author: FroznMine
 main: de.froznmine.ewop.Main
@@ -8,12 +8,25 @@ commands:
   blockuse:
     usage: /blockuse [welt]
     description: Schütze eine Welt davor, dass in ihr Items benutzt werden.
-    permission: mcprojekt.cmd.use
+    permission: mcprojekt.cmd.blockuse
   blockbuild:
     usage: /blockbuild [welt]
     description: Schütze eine Welt davor, dass in ihr Gebaut wird.
-    permission: mcprojekt.cmd.build
+    permission: mcprojekt.cmd.blockbuild
   blockbreak:
     usage: /blockbreak [welt]
     description: Schütze eine Welt davor, dass in ihr Abgebaut wird.
-    permission: mcprojekt.cmd.break
+    permission: mcprojekt.cmd.blockbreak
+  allowuse:
+    usage: /allowuse [welt]
+    description: Erlaubt es in einer Welt Items zu Benutzen.
+    permission: mcprojekt.cmd.allowuse
+  allowbuild:
+    usage: /allowbuild [welt]
+    description:  Erlaubt es in einer Welt Blöcke zu Bauen.
+    permission: mcprojekt.cmd.allowbuild
+  allowbreak:
+    usage: /allowbreak [welt]
+    description:  Erlaubt es in einer Welt Blöcke abzubauen.
+    permission: mcprojekt.cmd.allowbreak
+    
