@@ -1,6 +1,7 @@
 package de.froznmine.ewop;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -17,7 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {
 	private static List<String> dontUse, dontBuild, dontBreak;
-	private static HashMap<String, String> language = new HashMap<String, String>();
 
 	private File configFile;
 	public FileConfiguration configCfg;
@@ -49,13 +49,6 @@ public class Main extends JavaPlugin {
 		}	
 		
 		configCfg = YamlConfiguration.loadConfiguration(configFile);
-		
-		File langFile = new File("plugins/EWOP/" + configCfg.get("language") + ".yml");
-		
-		if (!langFile.exists()) {
-			langNeu = true;
-			saveResource(configCfg.get("language") + ".yml", false);
-		}
 
 		Language.setup(this);
 		
@@ -69,15 +62,34 @@ public class Main extends JavaPlugin {
 		
 		Commands executor = new Commands(this);
 		
-		getCommand("nouse").setExecutor(executor);
-		getCommand("nobuild").setExecutor(executor);
-		getCommand("nobreak").setExecutor(executor);
+		getCommand("blockuse").setExecutor(executor);
+		getCommand("blockbuild").setExecutor(executor);
+		getCommand("blockbreak").setExecutor(executor);
+		
+		getCommand("allowuse").setExecutor(executor);
+		getCommand("allowbuild").setExecutor(executor);
+		getCommand("allowbreak").setExecutor(executor);
 		
 		Bukkit.getServer().getPluginManager().registerEvents(new EventListener(), this);
-		if (cfgNeu) System.out.println("[EWOP] " + language.get("configFileCreated"));
-		if (langNeu) System.out.println("[EWOP] " + language.get("languageFileCreated"));
-		if (!problems) System.out.println("[EWOP] " + language.get("loadNoProblems"));
 		
+		if (cfgNeu) {
+			String message = Language.get("configFileCreated");
+			message.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
+			message.replaceAll("<world>", "");
+			System.out.println(message);
+		}
+		if (langNeu) { 
+			String message = Language.get("languageFileCreated");
+			message.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
+			message.replaceAll("<world>", "");
+			System.out.println(message);
+		}
+		if (!problems) {
+			String message = Language.get("loadNoProblems");
+			message.replaceAll("<version>", "EWOP " + this.getDescription().getVersion());
+			message.replaceAll("<world>", "");
+			System.out.println(message);
+		}
 	}
 	
 	public byte blockUse(String world) {
@@ -85,6 +97,12 @@ public class Main extends JavaPlugin {
 			World w = Bukkit.getWorld(world);
 			if (w != null) {
 				dontUse.add(world);
+				configCfg.set("dontUse", dontUse);
+				try {
+					configCfg.save(configFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return 1;
 			}
 			else {
@@ -99,6 +117,12 @@ public class Main extends JavaPlugin {
 			World w = Bukkit.getWorld(world);
 			if (w != null) {
 				dontBuild.add(world);
+				configCfg.set("dontBuild", dontBuild);
+				try {
+					configCfg.save(configFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return 1;
 			}
 			else {
@@ -113,6 +137,12 @@ public class Main extends JavaPlugin {
 			World w = Bukkit.getWorld(world);
 			if (w != null) {
 				dontBreak.add(world);
+				configCfg.set("dontBreak", dontBreak);
+				try {
+					configCfg.save(configFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return 1;
 			}
 			else {
@@ -127,6 +157,12 @@ public class Main extends JavaPlugin {
 			World w = Bukkit.getWorld(world);
 			if (w != null) {
 				dontUse.remove(world);
+				configCfg.set("dontUse", dontUse);
+				try {
+					configCfg.save(configFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return 1;
 			}
 			else {
@@ -141,6 +177,12 @@ public class Main extends JavaPlugin {
 			World w = Bukkit.getWorld(world);
 			if (w != null) {
 				dontBuild.remove(world);
+				configCfg.set("dontBuild", dontBuild);
+				try {
+					configCfg.save(configFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return 1;
 			}
 			else {
@@ -155,6 +197,12 @@ public class Main extends JavaPlugin {
 			World w = Bukkit.getWorld(world);
 			if (w != null) {
 				dontBreak.remove(world);
+				configCfg.set("dontBreak", dontBreak);
+				try {
+					configCfg.save(configFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				return 1;
 			}
 			else {
@@ -162,11 +210,6 @@ public class Main extends JavaPlugin {
 			}
 		}
 		return 0;
-	}
-	
-	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		return false;
 	}
 	
 	@Override
