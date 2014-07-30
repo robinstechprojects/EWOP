@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 public class Commands implements CommandExecutor {
 	private Main plugin;
+	
 	public Commands(Main main) {
 		plugin = main;
 	}
@@ -48,28 +49,28 @@ public class Commands implements CommandExecutor {
 				switch (plugin.blockUse(world)) {
 				case 1:	
 					message = Language.get("commandWorldBlockUseSuccess");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // erfolgreich blockiert
 					return true;
 				case 0:
 					message = Language.get("commandWorldBlockUseFailedAlready");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 					return true;
 				case -1:
 					message = Language.get("commandWorldBlockUseFailedNoWorld");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // welt existiert nicht
 					return true;
 				}
 			}
 			else {
 				String message = Language.get("commandWorldBlockUseFailedWorldMissing");
-				message.replace("<world>", "");
-				message.replace("<version>", "");
+				message.replaceAll("<world>", "");
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // Welt als console benötigt
 				return true;
 			}
@@ -81,20 +82,20 @@ public class Commands implements CommandExecutor {
 			switch (plugin.blockUse(world)) {
 			case 1:	
 				message = Language.get("commandWorldBlockUseSuccess");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // erfolgreich blockiert
 				return true;
 			case 0:
 				message = Language.get("commandWorldBlockUseFailedAlready");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 				return true;
 			case -1:
 				message = Language.get("commandWorldBlockUseFailedNoWorld");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // welt existiert nicht
 				return true;
 			}
@@ -112,28 +113,28 @@ public class Commands implements CommandExecutor {
 				switch (plugin.blockBuild(world)) {
 				case 1:	
 					message = Language.get("commandWorldBlockBuildSuccess");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // erfolgreich blockiert
 					return true;
 				case 0:
 					message = Language.get("commandWorldBlockBuildFailedAlready");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 					return true;
 				case -1:
 					message = Language.get("commandWorldBlockBuildFailedNoWorld");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // welt existiert nicht
 					return true;
 				}
 			}
 			else {
 				String message = Language.get("commandWorldBlockBuildFailedWorldMissing");
-				message.replace("<world>", "");
-				message.replace("<version>", "");
+				message.replaceAll("<world>", "");
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // Welt als console benötigt
 				return true;
 			}
@@ -144,20 +145,20 @@ public class Commands implements CommandExecutor {
 			switch (plugin.blockBuild(world)) {
 			case 1:	
 				message = Language.get("commandWorldBlockBuildSuccess");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // erfolgreich blockiert
 				return true;
 			case 0:
 				message = Language.get("commandWorldBlockBuildFailedAlready");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 				return true;
 			case -1:
 				message = Language.get("commandWorldBlockBuildFailedNoWorld");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // welt existiert nicht
 				return true;
 			}
@@ -174,28 +175,28 @@ public class Commands implements CommandExecutor {
 				switch (plugin.blockBreak(world)) {// if added
 				case 1:	
 					message = Language.get("commandWorldBlockBreakSuccess");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // erfolgreich blockiert
 					return true;
 				case 0:
 					message = Language.get("commandWorldBlockBreakFailedAlready");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 					return true;
 				case -1:
 					message = Language.get("commandWorldBlockBreakFailedNoWorld");
-					message.replace("<world>", world);
-					message.replace("<version>", "");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
 					p.sendMessage(message); // welt existiert nicht
 					return true;
 				}
 			}
 			else {
 				String message = Language.get("commandWorldBlockBreakFailedWorldMissing");
-				message.replace("<world>", "");
-				message.replace("<version>", "");
+				message.replaceAll("<world>", "");
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // Welt als console benötigt
 				return true;
 			}
@@ -207,20 +208,20 @@ public class Commands implements CommandExecutor {
 			switch (plugin.blockBreak(world)) {// if added
 			case 1:	
 				message = Language.get("commandWorldBlockBreakSuccess");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // erfolgreich blockiert
 				return true;
 			case 0:
 				message = Language.get("commandWorldBlockBreakFailedAlready");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 				return true;
 			case -1:
 				message = Language.get("commandWorldBlockBreakFailedNoWorld");
-				message.replace("<world>", world);
-				message.replace("<version>", "");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
 				sender.sendMessage(message); // welt existiert nicht
 				return true;
 			}
@@ -233,36 +234,58 @@ public class Commands implements CommandExecutor {
 			if (sender instanceof Player) {
 				Player p = (Player) sender;
 				String world = p.getWorld().getName();
+				String message;
 				
 				switch (plugin.allowUse(world)) {// if added
 				case 1:	
-					p.sendMessage(""); // ADD erfolgreich blockiert
+					message = Language.get("commandWorldAllowUseSuccess");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // erfolgreich freigeschalten
 					return true;
 				case 0:
-					p.sendMessage(""); // ADD bereits blockiert. /allowuse zum reaktivieren
+					message = Language.get("commandWorldAllowUseFailedAlready");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // bereits freigeschalten. /blockuse zum blockieren
 					return true;
 				case -1:
-					p.sendMessage(""); // ADD welt existiert nicht
+					message = Language.get("commandWorldAllowUseFailedNoWorld");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // welt existiert nicht
 					return true;
 				}
 			}
 			else {
-				sender.sendMessage("");// ADD Welt als console benötigt
+				String message = Language.get("commandWorldAllowUseFailedWorldMissing");
+				message.replaceAll("<world>", "");
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // Welt als console benötigt
 				return true;
 			}
 		}
 		if (args.length == 1) {
 			String world = args[0];
-			
+			String message;
 			switch (plugin.allowUse(world)) {// if added
 			case 1:	
-				sender.sendMessage(""); // ADD erfolgreich blockiert
+				message = Language.get("commandWorldAllowUseSuccess");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // erfolgreich freigeschalten
 				return true;
 			case 0:
-				sender.sendMessage(""); // ADD bereits blockiert. /allowuse zum reaktivieren
+				message = Language.get("commandWorldAllowUseFailedAlready");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // bereits freigeschalten. /blockuse zum blockieren
 				return true;
 			case -1:
-				sender.sendMessage(""); // ADD welt existiert nicht
+				message = Language.get("commandWorldAllowUseFailedNoWorld");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // welt existiert nicht
 				return true;
 			}
 		}
@@ -274,36 +297,58 @@ public class Commands implements CommandExecutor {
 			if (sender instanceof Player) {
 				Player p = (Player) sender;
 				String world = p.getWorld().getName();
+				String message;
 				
 				switch (plugin.allowBuild(world)) {// if added
 				case 1:	
-					p.sendMessage(""); // ADD erfolgreich blockiert
+					message = Language.get("commandWorldAllowBuildSuccess");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // erfolgreich blockiert
 					return true;
 				case 0:
-					p.sendMessage(""); // ADD bereits blockiert. /allowuse zum reaktivieren
+					message = Language.get("commandWorldAllowBuildFailedAlready");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 					return true;
 				case -1:
-					p.sendMessage(""); // ADD welt existiert nicht
+					message = Language.get("commandWorldAllowBuildFailedNoWorld");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // welt existiert nicht
 					return true;
 				}
 			}
 			else {
-				sender.sendMessage("");// ADD Welt als console benötigt
+				String message = Language.get("commandWorldAllowBuildFailedWorldMissing");
+				message.replaceAll("<world>", "");
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // Welt als console benötigt
 				return true;
 			}
 		}
 		if (args.length == 1) {
 			String world = args[0];
-			
+			String message;
 			switch (plugin.allowBuild(world)) {// if added
 			case 1:	
-				sender.sendMessage(""); // ADD erfolgreich blockiert
+				message = Language.get("commandWorldAllowBuildSuccess");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // erfolgreich blockiert
 				return true;
 			case 0:
-				sender.sendMessage(""); // ADD bereits blockiert. /allowuse zum reaktivieren
+				message = Language.get("commandWorldAllowBuildFailedAlready");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 				return true;
 			case -1:
-				sender.sendMessage(""); // ADD welt existiert nicht
+				message = Language.get("commandWorldAllowBuildFailedNoWorld");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // welt existiert nicht
 				return true;
 			}
 		}
@@ -315,36 +360,58 @@ public class Commands implements CommandExecutor {
 			if (sender instanceof Player) {
 				Player p = (Player) sender;
 				String world = p.getWorld().getName();
+				String message;
 				
 				switch (plugin.allowBreak(world)) {// if added
 				case 1:	
-					p.sendMessage(""); // ADD erfolgreich blockiert
+					message = Language.get("commandWorldAllowBreakSuccess");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // erfolgreich blockiert
 					return true;
 				case 0:
-					p.sendMessage(""); // ADD bereits blockiert. /allowuse zum reaktivieren
+					message = Language.get("commandWorldAllowBreakFailedAlready");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 					return true;
 				case -1:
-					p.sendMessage(""); // ADD welt existiert nicht
+					message = Language.get("commandWorldAllowBreakFailedNoWorld");
+					message.replaceAll("<world>", world);
+					message.replaceAll("<version>", "");
+					p.sendMessage(message); // welt existiert nicht
 					return true;
 				}
 			}
 			else {
-				sender.sendMessage("");// ADD Welt als console benötigt
+				String message = Language.get("commandWorldAllowBreakFailedWorldMissing");
+				message.replaceAll("<world>", "");
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // Welt als console benötigt
 				return true;
 			}
 		}
 		if (args.length == 1) {
 			String world = args[0];
-			
+			String message;
 			switch (plugin.allowBreak(world)) {// if added
 			case 1:	
-				sender.sendMessage(""); // ADD erfolgreich blockiert
+				message = Language.get("commandWorldAllowBreakSuccess");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // erfolgreich blockiert
 				return true;
 			case 0:
-				sender.sendMessage(""); // ADD bereits blockiert. /allowuse zum reaktivieren
+				message = Language.get("commandWorldAllowBreakFailedAlready");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // bereits blockiert. /allowuse zum reaktivieren
 				return true;
 			case -1:
-				sender.sendMessage(""); // ADD welt existiert nicht
+				message = Language.get("commandWorldAllowBreakFailedNoWorld");
+				message.replaceAll("<world>", world);
+				message.replaceAll("<version>", "");
+				sender.sendMessage(message); // welt existiert nicht
 				return true;
 			}
 		}
