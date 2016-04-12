@@ -8,9 +8,11 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
 public class EventListener implements Listener {
+	Player pe = event.getPlayer();
 	@EventHandler(priority = EventPriority.NORMAL)
 	private void onBuild(BlockPlaceEvent  e) {
 		if (!Main.canBuildIn(e.getPlayer(), e.getPlayer().getWorld().getName())) e.setCancelled(true);
+		pe.sendMessage("Du kannst hier nicht bauen");
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)
